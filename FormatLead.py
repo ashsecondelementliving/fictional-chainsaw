@@ -8,7 +8,7 @@ def formatLeadpy(input_file):
             reader = csv.DictReader(infile)
             reader.fieldnames = [name.lstrip('\ufeff') if name else name for name in reader.fieldnames]
 
-            fieldnames = ['Profile ID', 'LinkedIn Link', 'Name', 'Experiences', 'About']
+            fieldnames = ['Profile ID', 'LinkedIn Link', 'Name','Email Address', 'Experiences', 'About']
 
             with open(output_file, mode='w', encoding='utf-8', newline='') as outfile:
                 writer = csv.DictWriter(outfile, fieldnames=fieldnames)
