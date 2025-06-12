@@ -91,7 +91,7 @@ Ideal example based on provided input data:
             reader = csv.DictReader(infile)
             
             with open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
-                fieldnames = ['Profile ID', 'LinkedIn Link', 'Name', 'Subject', 'InMail Message']
+                fieldnames = ['Profile ID', 'LinkedIn Link', 'Name','Email Address', 'Subject', 'InMail Message']
                 writer = csv.DictWriter(outfile, fieldnames=fieldnames)
 
                 writer.writeheader()
