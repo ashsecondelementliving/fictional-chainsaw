@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Message Processor</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Center everything */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        /* Main container */
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+
+        /* Section spacing */
+        .section {
+            margin-top: 40px;
+        }
+
+        /* Section headers */
+        h2 {
+            font-size: 18px;
+            color: #333;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        /* Add a line above the heading */
+        h2::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #ddd;
+            position: absolute;
+            top: -12px;
+            left: 0;
+        }
+
+        /* Subheadings for file uploads */
+        .subheading {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        /* Input fields */
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Buttons */
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        /* Default button */
+        .btn-default {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .btn-default:hover {
+            background-color: #0056b3;
+        }
+
+        /* AI Message section */
+        .loading {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Name Section -->
+        <div class="section">
+            <h2>User Information</h2>
+            <label for="username">Enter Your First Name:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="ZoptoKey">(Optional) Enter Your Zopto API Key:</label>
+            <input type="text" id="ZoptoKey" name="ZoptoKey">
+        </div>
+
+
+        <!-- Error Overlay -->
+        <div id="errorOverlay" style="
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            z-index: 1000;
+        ">
+            <div style="background: red; padding: 20px; border-radius: 10px;">
+                <span id="errorMessage">An error occurred.</span>
+            </div>
+        </div>
+
+
+        <!-- Upload & Download Formatted Campaign -->
+        <div class="section">
+            <h2>Formatting</h2>
+            <p class="subheading">Upload the campaign file (.csv)</p>
+            <form action="/download_formatted_campaign" method="post" enctype="multipart/form-data" target="downloadFrame">
+                <input type="file" id="campaignFile" name="file" required>
+                <button type="submit" class="btn-default">Download Formatted Campaign</button>
+            </form>
+        </div>
+
+        <!-- Upload & Download AI Messages -->
+        <div class="section">
+            <h2>AI Messages</h2>
+            <p class="subheading">Upload the filled leads file (.csv)</p>
+            <form action="/download_ai_messages" method="post" enctype="multipart/form-data" onsubmit="return startLoading();" target="downloadFrame">
+                <input type="file" id="leadsFile" name="file" required>
+                <input type="hidden" id="hiddenName" name="username">
+                <button type="submit" class="btn-default">Download AI Messages</button>
+            </form>
+            <p class="loading" id="loadingMessage">Creating AI messages.</p>
+        </div>
+
+        <!-- Send AI Messages to Zopto -->
+        <div class="section">
+            <h2>Send AI Messages to Zopto</h2>
+            <form action="/send_ai_messages" method="post" onsubmit="return checkName();">
+                <input type="hidden" id="hiddenNameZopto" name="username">
+                <input type="hidden" id="hiddenApiKey" name="ZoptoKey"> 
+                <button type="submit" class="btn-default">Send AI Messages</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hidden iframe to track file downloads -->
+    <iframe id="downloadFrame" name="downloadFrame" style="display:none;" onload="stopLoading();"></iframe>
+
+    <script>
+        let loadingInterval;
+    
+        function startLoading() {
+            let username = document.getElementById("username").value.trim();
+            if (username === "") {
+                alert("Error: Name field is empty. Please enter your name.");
+                return false;
+            }
+    
+            document.getElementById("hiddenName").value = username;
+            document.getElementById("hiddenNameZopto").value = username;
+    
+            let loadingMessage = document.getElementById("loadingMessage");
+            loadingMessage.style.display = "block";
+    
+            let dots = 0;
+            loadingInterval = setInterval(() => {
+                dots = (dots + 1) % 4;
+                loadingMessage.textContent = "Creating AI messages" + ".".repeat(dots);
+            }, 1000);
+    
+            setTimeout(stopLoading, 10000); 
+    
+            return true;
+        }
+    
+        function stopLoading() {
+            clearInterval(loadingInterval);
+            let loadingMessage = document.getElementById("loadingMessage");
+            loadingMessage.style.display = "none";
+        }
+
+        function checkName() {
+            let username = document.getElementById("username").value.trim();
+            let apiKey = document.getElementById("ZoptoKey").value.trim();
+
+            if (username === "") {
+                showError("Error: Name field is empty. Please enter your name.");
+                return false;
+            }
+
+            if (apiKey === "") {
+                showError("Error: API key is required.");
+                return false;
+            }
+
+            document.getElementById("hiddenNameZopto").value = username;
+            document.getElementById("hiddenApiKey").value = apiKey;  
+
+            return true;
+        }
+        
+        function sendAiMessages(event) {
+            event.preventDefault();
+
+            let apiKey = document.getElementById("ZoptoKey").value.trim();
+            
+            if (apiKey === "") {
+                showError("Error: API key is required.");
+                return;
+            }
+
+            let formData = new FormData(event.target);
+            formData.append("ZoptoKey", apiKey);  // Ensure API key is included
+
+            fetch("/send_ai_messages", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    showError(data.error);
+                } else {
+                    alert("Success: AI Messages sent!");
+                }
+            })
+            .catch(error => {
+                showError("Unexpected error occurred. Please try again.");
+                console.error(error);
+            });
+        }
+
+        function showError(message) {
+        let errorOverlay = document.getElementById("errorOverlay");
+        let errorMessage = document.getElementById("errorMessage");
+
+        errorMessage.textContent = message;
+        errorOverlay.style.display = "flex";
+
+        setTimeout(() => {
+            errorOverlay.style.display = "none";
+        }, 5000); 
+        }
+    
+        window.addEventListener("focus", stopLoading);
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+__pycache__/
+uploads/
+processed/
+.DS_Store
+# Ignore Python cache files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore virtual environments
+venv/
+.env
+
+# Ignore system files
+.DS_Store
+Thumbs.db
