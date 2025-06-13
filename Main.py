@@ -89,7 +89,7 @@ Ideal example based on provided input data:
     def createPlain(message):
         messageArr = re.findall(r"\[(.*?)\]", message)  
         if len(messageArr) > 1:
-            messageArr = messageArr[1:]  
+            messageArr = messageArr[2:]  
             return messageArr
         else:
             messageErr = [""]
@@ -100,7 +100,7 @@ Ideal example based on provided input data:
             reader = csv.DictReader(infile)
             
             with open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
-                fieldnames = ['Profile ID', 'LinkedIn Link', 'Name','Email Address', 'Subject', 'Ai Message', 'Full Message']
+                fieldnames = ['Profile ID', 'LinkedIn Link', 'First Name', 'Last Name','Email Address', 'Subject', 'Ai Message', 'Full Message']
                 writer = csv.DictWriter(outfile, fieldnames=fieldnames)
 
                 writer.writeheader()
@@ -111,10 +111,15 @@ Ideal example based on provided input data:
                         body = createBody(response)
                         plain = createPlain(response)
                         subject = getsubject(response)  
+
+                        parts = lead['Name'].split()
+                        firstName = parts[0]
+                        lastName = parts[-1]
                         row = {
                             'Profile ID': lead['Profile ID'],
                             'LinkedIn Link': lead['LinkedIn Link'],
-                            'Name': lead['Name'],
+                            'First Name': firstName,
+                            'Last Name': lastName,
                             'Email Address': lead['Email Address'],
                             'Subject': subject,
                             'Ai Message': "\n\n".join(plain),
