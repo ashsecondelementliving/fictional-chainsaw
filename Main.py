@@ -85,13 +85,22 @@ Ideal example based on provided input data:
         else:
             messageErr = [""]
             return messageErr
+        
+    def createPlain(message):
+        messageArr = re.findall(r"\[(.*?)\]", message)  
+        if len(messageArr) > 1:
+            messageArr = messageArr[1:]  
+            return messageArr
+        else:
+            messageErr = [""]
+            return messageErr
             
     try:
         with open(input_file, mode='r', newline='', encoding='utf-8') as infile:
             reader = csv.DictReader(infile)
             
             with open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
-                fieldnames = ['Profile ID', 'LinkedIn Link', 'Name','Email Address', 'Subject', 'InMail Message']
+                fieldnames = ['Profile ID', 'LinkedIn Link', 'Name','Email Address', 'Subject', 'Ai Message', 'Full Message']
                 writer = csv.DictWriter(outfile, fieldnames=fieldnames)
 
                 writer.writeheader()
@@ -100,6 +109,7 @@ Ideal example based on provided input data:
                     if len(lead['About']) + len(lead['Experiences']) > 200: 
                         response = generate_inmail(lead)
                         body = createBody(response)
+                        plain = createPlain(response)
                         subject = getsubject(response)  
                         row = {
                             'Profile ID': lead['Profile ID'],
@@ -107,7 +117,8 @@ Ideal example based on provided input data:
                             'Name': lead['Name'],
                             'Email Address': lead['Email Address'],
                             'Subject': subject,
-                            'InMail Message': "\n\n".join(body)
+                            'Ai Message': "\n\n".join(plain),
+                            'Full Message': "\n\n".join(body)
                         }
                         
                         writer.writerow(row)
