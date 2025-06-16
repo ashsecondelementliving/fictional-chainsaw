@@ -17,7 +17,7 @@ def clear_old_files():
         if file.endswith(".csv"):
             os.remove(file)
 
-clear_old_files()  # Run once when the server starts
+clear_old_files()  
 
 @app.route("/", methods=["GET"])
 def index():
@@ -70,7 +70,7 @@ def download_ai_messages():
         return "Error: Name field is empty. Please enter your name.", 400
     
    
-    mapperMain(sender_name, filled_leads_filepath)
+    mapperMain(sender_name, filled_leads_filepath, socketio)
 
     if os.path.exists(ai_messages_filepath):
         socketio.emit("download_complete")  
