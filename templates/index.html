@@ -161,7 +161,7 @@
                 <input type="hidden" id="hiddenName" name="username">
                 <button type="submit" class="btn-default">Download AI Messages</button>
             </form>
-            <p class="loading" id="loadingMessage">Creating AI messages.</p>
+            <p class="loading" id="loadingMessage"></p>
         </div>
 
         <!-- Send AI Messages to Zopto -->
@@ -187,21 +187,12 @@
                 alert("Error: Name field is empty. Please enter your name.");
                 return false;
             }
-    
+
             document.getElementById("hiddenName").value = username;
             document.getElementById("hiddenNameZopto").value = username;
-    
-            let loadingMessage = document.getElementById("loadingMessage");
-            loadingMessage.style.display = "block";
-    
-            let dots = 0;
-            loadingInterval = setInterval(() => {
-                dots = (dots + 1) % 4;
-                loadingMessage.textContent = "Creating AI messages" + ".".repeat(dots);
-            }, 1000);
-    
-            setTimeout(stopLoading, 10000); 
-    
+
+            document.getElementById("loadingMessage").style.display = "block";
+
             return true;
         }
     
@@ -275,6 +266,17 @@
         }
     
         window.addEventListener("focus", stopLoading);
+    </script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on("progress_update", data => {
+            const msg = `${data.current}/${data.total} messages processed`;
+            const loadingEl = document.getElementById("loadingMessage");
+            loadingEl.textContent = msg;
+            loadingEl.style.display = "block";
+        });
     </script>
 </body>
 </html>
