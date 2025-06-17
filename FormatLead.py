@@ -8,7 +8,7 @@ def formatLeadpy(input_file):
             reader = csv.DictReader(infile)
             reader.fieldnames = [name.lstrip('\ufeff') if name else name for name in reader.fieldnames]
 
-            fieldnames = ['Profile ID', 'LinkedIn Link', 'Name','Email Address','Tenure At Position','Company', 'Experiences', 'About']
+            fieldnames = ['Profile ID', 'LinkedIn Link', 'Name','Email Address','Title','Tenure At Position','Company', 'Experiences', 'About']
 
             with open(output_file, mode='w', encoding='utf-8', newline='') as outfile:
                 writer = csv.DictWriter(outfile, fieldnames=fieldnames)
@@ -27,6 +27,7 @@ def formatLeadpy(input_file):
                         linkedin_link = row.get('ProfileUrl', '')
                         profile_id = row.get('ProfileId', '')
                         email_address = row.get('EmailAddress')
+                        title = row.get('Title')
                         tenure = row.get('Tenure At Position')
                         company = row.get('Company')
                         name = f"{row.get('FirstName', '').strip()} {row.get('LastName', '').strip()}"
@@ -34,6 +35,7 @@ def formatLeadpy(input_file):
                         linkedin_link = row.get('profile_link', '')
                         profile_id = row.get('id', '')
                         email_address = row.get('email')
+                        title = ''
                         tenure = ''
                         company = ''
                         name = f"{row.get('first_name', '').strip()} {row.get('last_name', '').strip()}"
@@ -43,6 +45,7 @@ def formatLeadpy(input_file):
                         'LinkedIn Link': linkedin_link,
                         'Name': name,
                         'Email Address': email_address,
+                        'Title': title,
                         'Tenure At Position': tenure,
                         'Company': company,
                         'Experiences': '',
