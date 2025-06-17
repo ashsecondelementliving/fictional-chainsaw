@@ -94,7 +94,7 @@ Ideal example based on provided input data:
             total = len(leads)
 
             with open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
-                fieldnames = ['Profile ID', 'LinkedIn Link', 'First Name', 'Last Name','Email Address', 'Subject', 'Ai Message', 'Full Message']
+                fieldnames = ['Profile ID', 'LinkedIn Link', 'Company', 'Title', 'First Name', 'Last Name','Email Address', 'Subject', 'Ai Message', 'Full Message']
                 writer = csv.DictWriter(outfile, fieldnames=fieldnames, extrasaction='ignore')
                 writer.writeheader()
 
@@ -110,6 +110,8 @@ Ideal example based on provided input data:
                         row = {
                             'Profile ID': lead['Profile ID'],
                             'LinkedIn Link': lead['LinkedIn Link'],
+                            'Company': lead.get('Company',''),
+                            'Title': lead.get('Title',''),
                             'First Name': firstName,
                             'Last Name': lastName,
                             'Email Address': lead.get('Email Address', ''),
