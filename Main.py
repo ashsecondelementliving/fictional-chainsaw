@@ -95,7 +95,7 @@ Ideal example based on provided input data:
 
             with open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
                 fieldnames = ['Profile ID', 'LinkedIn Link', 'Company', 'Title', 'First Name', 'Last Name','Email Address', 'Subject', 'Ai Message', 'Full Message']
-                writer = csv.DictWriter(outfile, fieldnames=fieldnames, extrasaction='ignore')
+                writer = csv.DictWriter(outfile, fieldnames=fieldnames, extrasaction='ignore', quoting=csv.QUOTE_ALL)
                 writer.writeheader()
 
                 for idx, lead in enumerate(leads, start=1):
