@@ -65,9 +65,14 @@ Ideal example based on provided input data:
             print(f"Error generating message for {lead['Name']}: {e}")
             return "Error generating message"
 
-    def getsubject(message): 
-        match = re.search(r"\[SUBJECT: \"(.*?)\"\]", message)
-        return match.group(1) if match else ""
+    def getsubject(message, lead):
+        if ('Tenure At Position' in lead and len(lead['Tenure At Position']) > 1) and ('Company' in lead and len(lead['Company']) > 1):
+            return f"Quick question about your {lead['Tenure At Position']} in your current position at {lead['Company']}"
+        else:
+            match = re.search(r'\[SUBJECT: "(.*?)"\]', message)
+            return match.group(1) if match else ""
+        
+        
 
     def createBody(message):
         messageArr = re.findall(r"\[(.*?)\]", message)  
@@ -94,7 +99,7 @@ Ideal example based on provided input data:
             total = len(leads)
 
             with open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
-                fieldnames = ['Profile ID', 'LinkedIn Link', 'Company', 'Title', 'First Name', 'Last Name','Email Address', 'Subject', 'Ai Message', 'Full Message']
+                fieldnames = ['Profile ID', 'LinkedIn Link', 'First Name', 'Last Name','Email Address', 'Subject', 'Ai Message', 'Full Message']
                 writer = csv.DictWriter(outfile, fieldnames=fieldnames, extrasaction='ignore', quoting=csv.QUOTE_ALL)
                 writer.writeheader()
 
@@ -103,15 +108,13 @@ Ideal example based on provided input data:
                         response = generate_inmail(lead)
                         body = createBody(response)
                         plain = createPlain(response)
-                        subject = getsubject(response)  
+                        subject = getsubject(response, lead)  
                         parts = lead['Name'].split()
                         firstName = parts[0]
                         lastName = parts[-1]
                         row = {
                             'Profile ID': lead['Profile ID'],
                             'LinkedIn Link': lead['LinkedIn Link'],
-                            'Company': lead.get('Company',''),
-                            'Title': lead.get('Title',''),
                             'First Name': firstName,
                             'Last Name': lastName,
                             'Email Address': lead.get('Email Address', ''),
