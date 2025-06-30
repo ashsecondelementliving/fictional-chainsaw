@@ -2,7 +2,7 @@ import csv
 from Main import mainpy
 from PhantomCreator import creatorMain
 
-def mapperMain(senderName, input_file, socketio=None):
+def mapperMain(senderName, input_file, output_file, socketio=None):
     with open(input_file, mode='r', newline='', encoding='utf-8') as infile:
         reader = csv.DictReader(infile)
         if "vmid" in reader.fieldnames:
@@ -10,6 +10,6 @@ def mapperMain(senderName, input_file, socketio=None):
             creatorMain(input_file, senderName, socketio)
         elif "About" in reader.fieldnames:
             print("Manual Process")
-            mainpy (senderName, input_file, socketio)
-        else: 
+            mainpy(senderName, input_file, output_file, socketio)
+        else:
             return "Error: Please enter a valid .csv file"
