@@ -30,7 +30,7 @@ def download_formatted_campaign():
     formatted_filepath = f"/tmp/{session_id}_ParsedLeads.csv"
 
     file.save(campaign_filepath)
-    formatLeadpy(campaign_filepath)
+    formatLeadpy(campaign_filepath, formatted_filepath)
 
     if os.path.exists(formatted_filepath):
         response = send_file(formatted_filepath, as_attachment=True)
