@@ -1,10 +1,8 @@
 import csv
 
-def formatLeadpy(input_file):
-    output_file = 'ParsedLeads.csv'
-
+def formatLeadpy(input_file, output_file):
     try:
-        with open(input_file, mode='r', encoding='utf-8-sig') as infile:  
+        with open(input_file, mode='r', encoding='utf-8-sig') as infile:
             reader = csv.DictReader(infile)
             reader.fieldnames = [name.lstrip('\ufeff') if name else name for name in reader.fieldnames]
 
@@ -21,7 +19,7 @@ def formatLeadpy(input_file):
                 else:
                     print("Error: Unrecognized file format.")
                     return
-                
+
                 for row in reader:
                     if file_type == "zopto":
                         linkedin_link = row.get('ProfileUrl', '')
