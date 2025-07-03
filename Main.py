@@ -40,7 +40,7 @@ In between the quotation marks should be a subject line for the message that you
 
 Then create the paragraph: "Hi (first name),"
 
-Then create 1 condensed sentence (that is grammatically correct and not a run-on) starting with: “I'm reaching out because I noticed...” outlining career progress and achievements.
+Then create 1 condensed sentence (that is grammatically correct and not a run-on) that should be formatted like: “I saw ..., your...” outlining career progress and achievements, then mention their positive attributes.
 
 Then add: "Are you achieving your career goals at (current company name)?"
 
@@ -71,11 +71,11 @@ Example Output: {example['Output']}
         if len(messageArr) > 1:
             messageArr = messageArr[1:]
             canned = [
-                "The reason I ask is that we have mentored hundreds of high-achieving professionals like you, helping them rise to more senior levels.",
-                "We were able to help Debesh land a CIO job in the Retail industry. We also recently helped Susan land an executive position in the pharma industry. (Their testimonials along with many others are on our website and my LinkedIn profile.)",
-                "Would you like to schedule a complimentary consultation to discuss your career?",
+                "We’ve helped hundreds of high-achieving professionals move into senior roles by identifying their leadership personalities, elevating their executive profiles, refining their brands, and guiding them to land top executive positions, either internally or elsewhere.",
+                "Recently Debesh landed a CIO role in Retail; Susan secured an executive position in Pharma. (Their testimonials and many others are on my LinkedIn and our site.)",
+                "Open to a quick call to discuss?",
                 f"Best,\n{senderName}",
-                "P.S. Please note that we are not recruiters and are not reaching out for any specific job openings."
+                "P.S. We’re not recruiters and not contacting you about a job opening. Reply with 'no thanks' If you don't want to receive emails from us."
             ]
             return messageArr + canned
         else:
