@@ -128,11 +128,11 @@ AICP Juror
 
 [SUBJECT: “Quick question about your 7 years at IBM.”]
 
-[Hey Stephanie,]
+[Hi Stephanie,]
 
-[The I’m reaching out because I noticed your impact at IBM, where you’ve impressively driven large-scale AI and hybrid cloud transformations while leading strategic initiatives for General Dynamics]
+[I saw your rise from Executive Director at InMobi to Principal Lead at IBM, your leadership in digital transformation and enterprise strategy shows clear vision and cross-sector impact.]
 
-[Are you achieving your career goals at IBM?]
+[Are you reaching your career goals at IBM?]
 
 """
 }
