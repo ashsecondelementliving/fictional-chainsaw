@@ -69,6 +69,7 @@ def download_ai_messages():
 
     if os.path.exists(ai_messages_filepath):
         socketio.emit("download_complete")
+        socketio.emit("ai_file_ready", {"path": ai_messages_filepath})  
         response = send_file(ai_messages_filepath, as_attachment=True)
 
         @response.call_on_close
