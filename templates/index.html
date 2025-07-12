@@ -277,6 +277,10 @@
             loadingEl.textContent = msg;
             loadingEl.style.display = "block";
         });
+
+        socket.on("ai_file_ready", data => {
+            document.getElementById("hiddenOutputFile").value = data.path;
+        });
     </script>
 </body>
 </html>
