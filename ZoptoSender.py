@@ -19,7 +19,7 @@ def zoptoSenderpy(api_key, input_file):
 
             for row in reader:
                 profile_id = row.get('Profile ID', '').strip()
-                message = row.get('InMail Message', '').strip()
+                message = row.get('Full Message', '').strip()
 
                 if profile_id and message and profile_id not in processed_profiles and "SUBJECT:" not in message:
                     time.sleep(45)
