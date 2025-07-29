@@ -132,8 +132,6 @@ AICP Juror
 
 [I saw your rise from Executive Director at InMobi to Principal Lead at IBM, your leadership in digital transformation and enterprise strategy shows clear vision and cross-sector impact.]
 
-[Are you reaching your career goals at IBM?]
-
 """
 }
 
