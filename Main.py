@@ -42,7 +42,6 @@ Then create the paragraph: "Hi (first name),"
 
 Then create 1 condensed sentence (that is grammatically correct and not a run-on) that should be formatted like: “I saw ..., your...” outlining career progress and achievements, then mention their positive attribute(s). This sentence should be dense with no filler words, exactly like the example. Do not make it wordy, make it concise and straight to the point in a natural way.
 
-Then add: "Are you achieving your career goals at (current company name)?"
 
 Example Input:
 Name: {example['Name']}
@@ -71,6 +70,7 @@ Example Output: {example['Output']}
         if len(messageArr) > 1:
             messageArr = messageArr[1:]
             canned = [
+                "Are you looking to move to a new and more senior role?",
                 "We’ve helped hundreds of high-achieving professionals move into senior roles by identifying their leadership personalities, elevating their executive profiles, refining their brands, and guiding them to land top executive positions, either internally or elsewhere.",
                 "Recently Debesh landed a CIO role in Retail; Susan secured an executive position in Pharma. (Their testimonials and many others are on my LinkedIn and our site.)",
                 "Open to a quick call with our career specialist?",
