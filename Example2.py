@@ -54,7 +54,6 @@ jobDuration2: 1 yr 5 mos
 
 [I’m reaching out because I noticed your impact at MSCI, where you’ve impressively led enterprise database architecture and operations across on-prem and Azure platforms while also stepping in as interim Enterprise Architect]
 
-[Are you achieving your career goals at MSCI?]
 
 """
 }
