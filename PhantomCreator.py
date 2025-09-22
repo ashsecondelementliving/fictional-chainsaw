@@ -5,7 +5,7 @@
 import csv
 import autoCreator
 
-def creatorMain (input_file, senderName, socketio=None ):
+def creatorMain (input_file, senderName, output_file, socketio=None ):
     
     # def autoCreator(ID,link, name, about, experience):
     #     print(ID)
@@ -26,8 +26,8 @@ def creatorMain (input_file, senderName, socketio=None ):
     print("formatting...")
 
     with open(input_file, newline='', encoding='utf-8') as csvfile, \
-         open('OutputMessages.csv', mode='w', newline='', encoding='utf-8') as outfile:
-
+         open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
+             
         reader = csv.DictReader(csvfile)
         fieldnames = ['Profile ID', 'LinkedIn Link', 'Name', 'Email Address', 'Subject', 'InMail Message']
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
