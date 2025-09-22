@@ -13,35 +13,21 @@ Name: {name}
 About: {about}
 Experience: {experience}
 
-Follow this template:
+follow this template:
 
-The message should reference specific things that are extremely personalized with the tone sounding professional but approachable and human.
-The message needs to be a concise and dense as possible, making sure there are no filler words and each word is placed for its own meticulous purpose.
+The message should reference specific things that are extremely personalized with the tone sounding professional but approachable.
+The message needs to be a concise and dense as possible, making sure there are no filler words and each word is placed for its own meticulous purpose
 
 Each paragraph needs to have brackets around them ([example])
 
 Here is what your response will look like:
 
-IMPORTANT: You must start your response with the subject line using this **exact format**:
-[SUBJECT: "Quick question about your <duration> at <latest company name>"]
-
-Rules:
-- Keep the square brackets and the word SUBJECT.
-- Inside the quotes, replace <duration> with the number of years or months at the most recent company.
-  - If greater than 1 year, use: "X years"
-  - If less than 1 year, use: "X months"
-- Replace <latest company name> with the name of the most recent company in their experience.
-- Do not change or remove the square brackets, the colon, or the quotes.
-- This must always be the **first line** in the response or the output is invalid.
-
+At the beginning of your response include exactly (include the brackets and quotes): [SUBJECT: ""]
+In between the quotation marks should be a subject line for the message that you create based on the following format: "Quick question about your <number of years at latest company if numbers of year more than 1, else include number of months at latest company> years at <latest company name>"
 
 Then create the paragraph: "Hi (first name),"
 
-Then create 1 condensed sentence (that is grammatically correct and not a run-on) for the following: 
-Start this paragraph with “I'm reaching out because I noticed” then begins to outline career progress and/or achievements throughout their career while subtly praising them for their accomplishment mentioned while also non explicitly, subtly implying ackowledgment of positive atributes that let them accomplish what was mentioned. This paragraph needs to be specific, specifically referencing company name(s) and/or specific achievements. 
-This should be very short, with the absolute maximum word limit being 40 words
-
-Then create a paragraph containing: "Are you achieving your career goals at (current company name)?"
+Then create 1 condensed sentence (that is grammatically correct and not a run-on) that should be formatted like: “I saw ..., your...” outlining career progress and achievements, then mention their positive attribute(s). This sentence should be dense with no filler words, exactly like the example. Do not make it wordy, make it concise and straight to the point in a natural way.
 
 
 Ideal example based on provided input data:
