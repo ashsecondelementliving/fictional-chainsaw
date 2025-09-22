@@ -43,7 +43,7 @@ def creatorMain (input_file, senderName, output_file, socketio=None ):
                 row['Profile ID'],
                 row['LinkedIn Link'],
                 row['Name'],
-                row['EmailAddress'],
+                row['Email Address'],
                 description,
                 Jobs,
                 senderName
