@@ -56,19 +56,19 @@ def getsubject(message):
 
 def createBody(message, senderName):
     messageArr = re.findall(r"\[(.*?)\]", message)
-        if len(messageArr) > 1:
-            messageArr = messageArr[1:]
-            canned = [
-                "Are you looking to move to a new and more senior role?",
-                "We’ve helped hundreds of high-achieving professionals move into senior roles by identifying their leadership personalities, elevating their executive profiles, refining their brands, and guiding them to land top executive positions, either internally or elsewhere.",
-                "Recently Debesh landed a CIO role in Retail; Susan secured an executive position in Pharma. (Their testimonials and many others are on my LinkedIn and our site.)",
-                "Open to a quick call with our career specialist?",
-                f"Best,\n{senderName}",
-                "P.S. We’re not recruiters and not contacting you about a job opening. Reply with 'no thanks' If you don't want to receive emails from us."
-            ]
-            return messageArr + canned
-        else:
-            return [""]
+    if len(messageArr) > 1:
+        messageArr = messageArr[1:]
+        canned = [
+            "Are you looking to move to a new and more senior role?",
+            "We’ve helped hundreds of high-achieving professionals move into senior roles by identifying their leadership personalities, elevating their executive profiles, refining their brands, and guiding them to land top executive positions, either internally or elsewhere.",
+            "Recently Debesh landed a CIO role in Retail; Susan secured an executive position in Pharma. (Their testimonials and many others are on my LinkedIn and our site.)",
+            "Open to a quick call with our career specialist?",
+            f"Best,\n{senderName}",
+            "P.S. We’re not recruiters and not contacting you about a job opening. Reply with 'no thanks' If you don't want to receive emails from us."
+        ]
+        return messageArr + canned
+    else:
+        return [""]
 
 def main(ID, link, name, email, about, experience, senderName):
     response = generate_ai_message(ID, link, name, about, experience)
