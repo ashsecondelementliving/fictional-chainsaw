@@ -29,7 +29,7 @@ def creatorMain (input_file, senderName, output_file, socketio=None ):
          open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
              
         reader = csv.DictReader(csvfile)
-        fieldnames = ['Profile ID', 'LinkedIn Link', 'Name', 'Email Address', 'Subject', 'InMail Message']
+        fieldnames = ['Profile ID', 'LinkedIn Link', 'Name', 'Email Address', 'Subject', 'Full Message']
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
         writer.writeheader()
 
