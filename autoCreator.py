@@ -81,7 +81,7 @@ def main(ID, link, name, email, about, experience, senderName):
         'Name': name,
         'Email Address': email,
         'Subject': subject,
-        'InMail Message': "\n\n".join(body)
+        'Full Message': "\n\n".join(body)
     }
 
     print(name + " InMail message saved.")
