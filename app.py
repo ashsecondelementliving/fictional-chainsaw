@@ -88,17 +88,29 @@ def download_ai_messages():
 
 @app.route("/send_ai_messages", methods=["POST"])
 def send_ai_messages():
-    api_key = request.form.get("ZoptoKey", "").strip()  
-    output_file = request.form.get("output_file", "").strip()
+    if not send_lock.acquire(blocking=False):
+        return {"error": "A send is already in progress."}, 409
+    try:
+        api_key = request.form.get("ZoptoKey", "").strip()
+        output_file = request.form.get("output_file", "").strip()
 
-    if not api_key:
-        return {"error": "Error: No API key provided."}, 400
+        if not api_key:
+            return {"error": "Error: No API key provided."}, 400
+        if not output_file or not os.path.exists(output_file):
+            return {"error": "No AI messages file found."}, 404
 
-    if not output_file or not os.path.exists(output_file):
-        return {"error": "No AI messages file found."}, 404
+        queued, skipped = zoptoSenderpy(api_key, output_file)
 
-    zoptoSenderpy(api_key, output_file)
-    return {"success": "AI Messages sent to Zopto!"}
+        if queued == 0:
+            return {
+                "error": "No messages queued (duplicates/empty/filtered).",
+                "queued": queued,
+                "skipped": skipped
+            }, 400
+
+        return {"success": f"Queued {queued} messages.", "skipped": skipped}
+    finally:
+        send_lock.release()
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=10000, debug=True)
