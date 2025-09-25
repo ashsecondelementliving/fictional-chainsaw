@@ -111,6 +111,5 @@ def send_ai_messages():
         return {"success": f"Queued {queued} messages.", "skipped": skipped}
     finally:
         send_lock.release()
-
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=10000, debug=True)
+    socketio.run(app, host="0.0.0.0", port=10000, debug=False)  
