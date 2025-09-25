@@ -8,6 +8,8 @@ from flask_socketio import SocketIO
 from FormatLead import formatLeadpy  
 from mapper import mapperMain
 from ZoptoSender import zoptoSenderpy 
+from eventlet.semaphore import Semaphore
+send_lock = Semaphore(1)
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
