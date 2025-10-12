@@ -58,13 +58,28 @@ Example Output: {example['Output']}
             print(f"Error generating message for {lead['Name']}: {e}")
             return "Error generating message"
 
+#    def getsubject(message, lead):
+#        if ('Tenure At Position' in lead and len(lead['Tenure At Position']) > 1) and ('Company' in lead and len(lead['Company']) > 1):
+#            return f"Quick question about your {lead['Tenure At Position']} in your current position at {lead['Company']}"
+#        else:
+#            match = re.search(r'\[SUBJECT: "(.*?)"\]', message)
+#            return match.group(1) if match else ""
+
     def getsubject(message, lead):
-        if ('Tenure At Position' in lead and len(lead['Tenure At Position']) > 1) and ('Company' in lead and len(lead['Company']) > 1):
-            return f"Quick question about your {lead['Tenure At Position']} in your current position at {lead['Company']}"
+        company = lead.get('Company', '').strip()
+        university = lead.get('University', '').strip()
+
+        if company and university:
+            return f"{company}/{university}"
+        elif company:
+            return company
+        elif university:
+            return university
         else:
             match = re.search(r'\[SUBJECT: "(.*?)"\]', message)
             return match.group(1) if match else ""
 
+    
     def createBody(message):
         messageArr = re.findall(r"\[(.*?)\]", message)
         if len(messageArr) > 1:
