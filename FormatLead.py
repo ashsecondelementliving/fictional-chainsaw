@@ -6,7 +6,7 @@ def formatLeadpy(input_file, output_file):
             reader = csv.DictReader(infile)
             reader.fieldnames = [name.lstrip('\ufeff') if name else name for name in reader.fieldnames]
 
-            fieldnames = ['Profile ID', 'LinkedIn Link', 'Name','Email Address','Title','Tenure At Position','Company', 'Experiences', 'About']
+            fieldnames = ['Profile ID', 'LinkedIn Link', 'Name','Email Address','Title','Tenure At Position','Company', 'Experiences', 'About', 'University']
 
             with open(output_file, mode='w', encoding='utf-8', newline='') as outfile:
                 writer = csv.DictWriter(outfile, fieldnames=fieldnames)
@@ -47,7 +47,8 @@ def formatLeadpy(input_file, output_file):
                         'Tenure At Position': tenure,
                         'Company': company,
                         'Experiences': '',
-                        'About': ''
+                        'About': '',
+                        'University': ''
                     })
 
         print(f"Parsed data has been written to {output_file}.")
