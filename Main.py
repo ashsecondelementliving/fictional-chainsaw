@@ -73,10 +73,6 @@ Example Output: {example['Output']}
             return f"{company}/{university}"
         elif ('Tenure At Position' in lead and len(lead['Tenure At Position']) > 1) and ('Company' in lead and len(lead['Company']) > 1):
             return f"Quick question about your {lead['Tenure At Position']} in your current position at {lead['Company']}"
-        elif company:
-            return company
-        elif university:
-            return university
         else:
             match = re.search(r'\[SUBJECT: "(.*?)"\]', message)
             return match.group(1) if match else ""
