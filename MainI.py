@@ -4,7 +4,7 @@ import threading
 from Example import example
 import re
 
-def mainpy(senderName, input_file, output_file, socketio=None):
+def mainIpy(senderName, input_file, output_file, socketio=None):
     openai.api_key = "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"
 
     def call_openai(prompt, result_holder):
