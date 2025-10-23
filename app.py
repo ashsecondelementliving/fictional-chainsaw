@@ -67,7 +67,8 @@ def download_ai_messages():
     ai_messages_filepath = f"/tmp/{session_id}_OutputMessages.csv"
 
     file.save(filled_leads_filepath)
-    mapperMain(sender_name, filled_leads_filepath, ai_messages_filepath, socketio)
+    mode = request.form.get("mode", "email")
+    mapperMain(sender_name, filled_leads_filepath, ai_messages_filepath, socketio, mode)
 
     if os.path.exists(ai_messages_filepath):
         socketio.emit("download_complete")
