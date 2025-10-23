@@ -1,6 +1,6 @@
 import csv
 from Main import mainpy
-from InMailMain import mainIpy  
+from MainI import mainIpy  
 from PhantomCreator import creatorMain
 
 def mapperMain(senderName, input_file, output_file, socketio=None, mode="email"):
