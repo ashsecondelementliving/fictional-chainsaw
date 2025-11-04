@@ -59,13 +59,11 @@ def createBody(message, senderName):
     if len(messageArr) > 1:
         messageArr = messageArr[1:]
         canned = [
-            "Are you looking to move to a new and more senior role?",
-            "We’ve helped hundreds of high-achieving professionals move into senior roles by identifying their leadership personalities, elevating their executive profiles, refining their brands, and guiding them to land top executive positions, either internally or elsewhere.",
-            "Recently Debesh landed a CIO role in Retail; Susan secured an executive position in Pharma. (Their testimonials and many others are on my LinkedIn and our site.)",
-            "Open to a quick call with our career specialist?",
-            f"Best,\n{senderName}",
-            "P.S. We’re not recruiters and not contacting you about a job opening. Reply with 'no thanks' If you don't want to receive emails from us."
-        ]
+                "I am a Client Success Specialist here at Second Element Living. We partner with executives and senior leaders navigating career advancement or transitioning into new roles.",
+                "Your background is similar to those of our top successful clients who have landed senior level positions. Many of their testimonials are on my LinkedIn profile page and our web site.",
+                "I can arrange a call with one of our executive mentors to discuss your career aspirations and see if we can help.\nLet me know if you are interested.",
+                f"Best,\n{senderName}"
+            ]
         return messageArr + canned
     else:
         return [""]
