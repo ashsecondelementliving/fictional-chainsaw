@@ -40,7 +40,7 @@ In between the quotation marks should be a subject line for the message that you
 
 Then create the paragraph: "Hi (first name),"
 
-Then create 1 condensed sentence (that is grammatically correct and not a run-on) that should be formatted like: “I saw ..., your...” outlining career progress and achievements, then mention their positive attribute(s). This sentence should be dense with no filler words, exactly like the example. Do not make it wordy, make it concise and straight to the point in a natural way.
+Then create 1 condensed sentence (that is grammatically correct and not a run-on. Prioritize the sentence not being a run-on sentence) that should be formatted like: “I saw ..., your...” outlining career progress and achievements, then mention their positive attribute(s). This sentence should be dense with no filler words, exactly like the example. Do not make it wordy, make it concise and straight to the point in a natural way.
 
 
 Example Input:
