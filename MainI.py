@@ -110,7 +110,7 @@ Example Output: {example['Output']}
             canned_setters = [
                 "I am a Client Success Specialist here at Second Element Living. We partner with executives and senior leaders navigating career advancement or transitioning into new roles.",
                 "Your background is similar to those of our top successful clients who have landed senior level positions. Many of their testimonials are on my LinkedIn profile page and our web site.",
-                "If you are open to opportunities, I can arrange a call with one of our executive mentors to discuss your career aspirations and see if we can help. Let me know if you are interested.",
+                "If you are open to opportunities, I can arrange a call with one of our executive mentors to discuss your career aspirations and see if we can help.",
                 "Let me know if you are interested.",
                 f"Best,\n{senderName}"
             ]
